@@ -6,6 +6,22 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   // Override default ignores of eslint-config-next.
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ],
+      // data-fetching hooks throughout the codebase use this pattern;
+      // downgrade to warning until a migration to TanStack Query is complete
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/refs": "warn"
+    }
+  },
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",

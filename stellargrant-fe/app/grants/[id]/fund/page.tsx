@@ -1,21 +1,23 @@
 /**
  * Fund Grant Page
- * 
- * Dedicated funding flow. Lets any address deposit XLM or USDC
- * into a grant's escrow.
+ *
+ * Dedicated funding flow page. Lets any wallet holder deposit XLM or USDC
+ * into a grant's escrow. Deep-linkable at /grants/[id]/fund.
  */
 
-interface FundGrantPageProps {
-  params: {
-    id: string;
-  };
-}
+import { Metadata } from "next";
+import { FundGrantClient } from "./FundGrantClient";
 
-export default function FundGrantPage({ params }: FundGrantPageProps) {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Fund Grant #{params.id}</h1>
-      {/* Fund grant flow will be implemented here */}
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Fund Grant — StellarGrant Protocol",
+};
+
+export default async function FundGrantPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  return <FundGrantClient grantId={id} />;
 }

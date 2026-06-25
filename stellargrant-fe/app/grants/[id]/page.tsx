@@ -1,21 +1,29 @@
-/**
- * Grant Detail Page
- * 
- * Full grant page showing metadata, funding progress, milestone list,
- * reviewer panel, and event history.
- */
+import type { Metadata } from "next";
+import { fetchGrantById } from "@/lib/grants/api";
+import GrantDetailClient from "./GrantDetailClient";
 
 interface GrantDetailPageProps {
-  params: {
-    id: string;
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: GrantDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const detail = await fetchGrantById(id);
+  const grant = detail?.grant;
+  const description = grant?.description?.slice(0, 160) ?? "";
+
+  return {
+    title: `${grant?.title ?? "Grant"} — StellarGrant Protocol`,
+    description,
+    openGraph: {
+      title: grant?.title,
+      description,
+    },
   };
 }
 
 export default function GrantDetailPage({ params }: GrantDetailPageProps) {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Grant #{params.id}</h1>
-      {/* Grant detail view will be implemented here */}
-    </div>
-  );
+  return <GrantDetailClient params={params} />;
 }
+
+export const dynamic = "force-dynamic";

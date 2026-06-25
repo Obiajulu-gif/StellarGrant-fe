@@ -28,7 +28,7 @@ describe("API e2e", () => {
     const response = await request(app).get("/grants");
 
     expect(response.status).toBe(200);
-    expect(response.body.data).toHaveLength(2);
+    expect(response.body.data).toHaveLength(4);
     expect(response.body.data[0].title).toBe("Open Source Grants Q2");
   });
 

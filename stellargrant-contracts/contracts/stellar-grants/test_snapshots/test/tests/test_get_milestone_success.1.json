@@ -45,7 +45,7 @@
                       "symbol": "description"
                     },
                     "val": {
-                      "string": "Desc"
+                      "string": "Description"
                     }
                   },
                   {
@@ -77,7 +77,7 @@
                       "symbol": "milestone_amount"
                     },
                     "val": {
-                      "i128": "500"
+                      "i128": "1000"
                     }
                   },
                   {
@@ -135,7 +135,7 @@
                       "symbol": "title"
                     },
                     "val": {
-                      "string": "Test"
+                      "string": "Title"
                     }
                   },
                   {
